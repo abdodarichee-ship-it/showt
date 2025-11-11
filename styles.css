@@ -1,0 +1,487 @@
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        /* إعدادات خط أساسية وتطبيق لخط Inter */
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0f;
+            color: #fff;
+            min-height: 100vh;
+            transition: background-image 0.5s ease;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* تأثيرات الضبابية (Glassmorphism) */
+        .glass-effect {
+            background-color: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-light {
+            background-color: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* شريط أبل العلوي: تأثير التمويه الخلفي */
+        .apple-bar {
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        /* زر أبل: تصميم شفاف وأنيق */
+        .apple-btn {
+            background-color: rgba(255, 255, 255, 0.08);
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        .apple-btn:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+        .apple-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* حقل البحث: تصميم أنيق عند التركيز */
+        .apple-search-container:focus-within {
+            border-color: #0aa4ff;
+            box-shadow: 0 0 8px rgba(10, 164, 255, 0.5);
+        }
+        .apple-search input {
+            direction: rtl; /* ضمان كتابة النص العربي بشكل صحيح */
+        }
+        
+        /* شريط التنبيه الجانبي (Leftbar) */
+        .leftbar-overlay {
+            /* إخفاء مبدئي */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .leftbar-overlay.is-open {
+            /* إظهار عند فتح القائمة */
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* محتوى الشريط الجانبي (الانزلاق) */
+        .leftbar-content {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-out;
+        }
+        .leftbar-overlay.is-open .leftbar-content {
+            transform: translateX(0);
+        }
+
+        /* أزرار القائمة الجانبية */
+        .leftbar-content button {
+            transition: background-color 0.15s, color 0.15s;
+            border-radius: 8px; /* تقريب حواف الأزرار */
+        }
+        .leftbar-content button:hover {
+            background-color: #3f3f46; /* لون خلفية Hover */
+            color: #fff;
+        }
+
+        /* نافذة التعديل (مودال) */
+        .modal-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .modal-overlay.is-open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            transform: scale(0.9);
+            opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+        .modal-overlay.is-open .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* شبكة الصور في المودال */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 12px;
+        }
+
+        .bg-image-item {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .bg-image-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .bg-image-item.active {
+            border: 2px solid #0aa4ff;
+            box-shadow: 0 0 0 2px rgba(10, 164, 255, 0.5);
+        }
+
+        /* تعديلات للهاتف النقال */
+        @media (max-width: 640px) {
+            .apple-search-container {
+                width: 95%;
+            }
+            .center-box {
+                margin-top: 120px;
+            }
+            .leftbar-content {
+                width: 80%; /* توسيع الشريط الجانبي على الهاتف */
+            }
+            
+            /* تصميم خاص للمودال على الهاتف */
+            .modal-content {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                border-radius: 0;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .modal-body {
+                flex: 1;
+                overflow-y: auto;
+            }
+            
+            .image-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 10px;
+                padding: 10px;
+            }
+            
+            .modal-header {
+                padding: 16px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .modal-footer {
+                padding: 16px;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        /* طبقة داكنة فوق الخلفية لتحسين قراءة النص */
+        .overlay-dark {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+        
+        .center-box {
+            margin-top: 200px;
+        }
+        
+        #sidebarContent {
+            overflow: auto;
+            scrollbar-width: thin; /* Firefox */
+            scrollbar-color: rgba(16,185,129,0.7) transparent; /* Firefox */
+        }
+
+        /* Chrome, Edge, Safari */
+        #sidebarContent::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+            background: transparent; /* الشريط الخلفي شفاف */
+        }
+
+        #sidebarContent::-webkit-scrollbar-track {
+            background: transparent; /* المسار شفاف */
+        }
+
+        #sidebarContent::-webkit-scrollbar-thumb {
+            background-color: rgba(126, 126, 126, 0.7); /* لون الشريط */
+            border-radius: 10px;
+            border: 2px solid transparent; /* فاصلة لطيفة */
+            background-clip: content-box;
+            transition: background-color 0.3s ease;
+            opacity: 0; /* يبدأ مخفي */
+        }
+
+        /* يظهر عند التمرير بالماوس */
+        #sidebarContent:hover::-webkit-scrollbar-thumb {
+            opacity: 1;
+            background-color: rgba(16,185,129,0.9);
+        }
+
+        .linkmor {
+            margin-top: 20px;
+        }
+        
+        .linkmor a {
+            color: #d4d4d4;
+            text-decoration: underline;
+            margin-right: 20px;
+            transition: color 0.2s;
+        }
+        
+        .linkmor a:hover {
+            color: #0aa4ff;
+        }
+
+        .vis {
+            display: flex;
+            align-items: center;
+            margin: auto;
+            width: 300px;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .vis button {
+            font-size: 13px;
+            background-color: #3f3f46;
+            padding: 12px;
+            border-radius: 16px;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            color: white;
+        }
+
+        .vis button:hover {
+            background-color: #4e4e4e;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.4);
+        }
+
+        .vis button img {
+            width: 40px;
+            height: 32px;
+            margin-bottom: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .vis button:hover img {
+            transform: scale(1.2);
+        }
+
+        /* تأثيرات إضافية للشعار */
+        .logo {
+            text-shadow: 0 2px 10px rgba(10, 164, 255, 0.3);
+        }
+        
+        /* تأثيرات للشريط العلوي عند التمرير */
+        .scrolled {
+            background-color: rgba(20, 20, 20, 0.8) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* تحسينات للشاشات الكبيرة */
+        @media (min-width: 1024px) {
+            .vis {
+                width: 500px;
+            }
+            
+            .vis button {
+                width: 110px;
+                height: 110px;
+            }
+        }
+
+
+.banner {
+    position: fixed;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 400px;
+    padding: 15px 20px;
+    border-radius: 12px 12px 0 0;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    opacity: 0;
+    transition: all 0.7s ease;
+    z-index: 9999;
+}
+
+/* انقطاع الإنترنت */
+.offline {
+    background-color: rgb(35, 67, 73);
+    color: #fff;
+}
+
+/* رجوع الإنترنت */
+.online {
+    background-color: rgb(40, 189, 2);
+    color: #000;
+}
+
+/* ظهور تدريجي + انزلاق للأعلى */
+.show {
+    bottom: 0;
+    opacity: 1;
+}
+
+/* خلفية الإعدادات */
+/* الخلفية */
+/* الخلفية الكاملة */
+.seatting {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #121212;
+    display: none;
+    z-index: 999;
+    overflow: hidden;
+}
+
+/* صندوق الإعدادات يغطي كامل الصفحة */
+.settings-box {
+    width: 100%;
+    height: 100%;
+    background-color: #1c1c1e;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding-bottom: 20px;
+}
+
+/* الهيدر */
+.settings-header {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background-color: #2c2c2e;
+    border-bottom: 1px solid #333;
+}
+
+#closeSettings {
+    background: #3a3a3c;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    margin-right: auto;
+    cursor: pointer;
+    color: white;
+    font-size: 18px;
+}
+
+.settings-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    margin-left: auto;
+}
+
+/* البحث */
+.search-area {
+    padding: 10px 15px;
+    background-color: #2c2c2e;
+}
+
+.search-area input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    background: #3a3a3c;
+    color: white;
+    font-size: 16px;
+    outline: none;
+}
+
+/* محتوى الإعدادات */
+.settings-content {
+    flex: 1;
+    padding: 10px 0;
+    color: white;
+}
+
+.section {
+    margin-top: 20px;
+}
+
+.section h3 {
+    margin: 10px 20px;
+    color: #9e9e9e;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.item {
+    background: #2c2c2e;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #3a3a3c;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.2s;
+}
+
+.item:hover {
+    background: #3a3a3c;
+}
+
+/* السويتش */
+.switch {
+    margin-left: auto;
+    position: relative;
+    width: 48px;
+    height: 26px;
+}
+.switch input {
+    display: none;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    background: #555;
+    border-radius: 20px;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    transition: 0.3s;
+}
+.slider:before {
+    content: "";
+    position: absolute;
+    width: 22px; height: 22px;
+    background: #fff;
+    border-radius: 50%;
+    top: 2px; left: 2px;
+    transition: 0.3s;
+}
+input:checked + .slider {
+    background: #4cd964;
+}
+input:checked + .slider:before {
+    transform: translateX(22px);
+}

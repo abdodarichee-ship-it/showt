@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ShowT - المنصة الرئاسية للبحث والاستكشاف" />
+    <title>ShowT</title>
+    <!-- تحميل Tailwind CSS و Font Awesome -->
+     <link rel="icon" href="/icon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+   <link rel="stylesheet" href="styles.css">
+</head>
+<body class="p-0 m-0">
+    <!-- طبقة داكنة فوق الخلفية -->
+    <div class="overlay-dark"></div>
+
+    <!-- شريط أبل العلوي -->
+    <div class="apple-bar fixed top-0 w-full flex items-center p-2 md:p-3 gap-2 z-50">
+        <!-- زر فتح القائمة الجانبية -->
+        <button id="menuToggle" class="apple-btn w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center text-lg focus:outline-none">
+            <i class="fas fa-bars"></i>
+        </button>
+        <!-- زر التحرير/القلم -->
+        <button id="editToggle" class="apple-btn w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center text-base focus:outline-none">
+            <i class="fas fa-pen"></i>
+        </button>
+
+        <!-- زر الرابط (Gmail) في أقصى اليسار -->
+         <a href="https://mail.google.com/" style="margin-right: auto;" target="_blank">
+        <button class="mr-auto text-stone-300 hover:text-blue-500 text-sm md:text-base transition focus:outline-none bg-transparent border-none">
+            Gmail
+        </button>
+         </a>
+    </div>
+
+    <!-- البحث المركزي المصغر -->
+    <div class="center-box text-center mt-36 md:mt-52">
+        <h1 class="text-5xl md:text-6xl text-blue-500 mb-6 font-semibold tracking-tight logo">ShowT</h1>
+        
+        <!-- حقل البحث الأنيق -->
+        <div class="apple-search-container relative w-11/12 sm:w-[500px] mx-auto glass-light rounded-2xl p-2 border border-zinc-700 hover:border-blue-400/80 transition shadow-lg">
+            <div class="apple-search flex items-center gap-3">
+                <i class="fas fa-search text-blue-400 text-lg mr-1"></i>
+                <input id="searchInput" type="text" placeholder="ابحث هنا..."        autocomplete="off"
+       autocorrect="off"
+       autocapitalize="off"
+       spellcheck="false" class="flex-1 bg-transparent text-white p-2 text-base outline-none placeholder:text-zinc-400" />
+            </div>
+        </div>
+        
+        <div class="linkmor">
+            <a href="/safesearch/seafesarch.html" target="_blank">البحث الآمن</a>
+            <a href="https://images.google.com" target="_blank">الصور</a>
+        </div>
+        
+        <div class="vis">
+            <a href="https://youtube.com" target="_blank">
+                <button>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1280px-YouTube_full-color_icon_%282017%29.svg.png" alt="YouTube">
+                    YouTube
+                </button>
+            </a>
+            <a href="https://facebook.com" target="_blank">
+                <button>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/1024px-2021_Facebook_icon.svg.png" alt="Facebook">
+                    Facebook
+                </button>
+            </a>
+            <a href="https://twitter.com" target="_blank">
+                <button>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/1245px-Logo_of_Twitter.svg.png" alt="Twitter">
+                    Twitter
+                </button>
+            </a>
+        </div>
+    </div>
+    
+    <!-- القائمة الجانبية المنزلقة (Leftbar) -->
+    <div id="leftbar" class="leftbar-overlay fixed inset-0 z-[99] bg-black/50 backdrop-blur-sm">
+        <!-- محتوى القائمة الجانبية - ينزلق من اليمين -->
+        <div id="sidebarContent" class="leftbar-content fixed top-0 right-0 h-full w-64 glass-effect p-4 shadow-2xl">
+            <div class="flex flex-col gap-2 mt-12">
+                <button id="newwindow" class="flex items-center p-3 text-base text-right hover:bg-zinc-700/50 text-white rounded-lg">
+                    <i class="fa-solid fa-window-maximize text-blue-400 text-xl ml-3"></i>
+                    نافذة جديدة
+                </button>
+
+                <button id="safesrach" class="flex items-center p-3 text-base text-right hover:bg-zinc-700/50 text-white rounded-lg">
+                    <i class="fa-solid fa-shield-halved text-blue-400 text-xl ml-3"></i>
+                    البحث الآمن
+                </button>
+                
+                <hr style="border:  1px solid #313131;">
+                
+                <!-- الأزرار الجديدة المطلوبة -->
+                <button id="akhbar" class="flex items-center p-3 text-base text-right hover:bg-zinc-700/50 text-white rounded-lg">
+                    <i class="fa-solid fa-newspaper text-blue-400 text-xl ml-3"></i>
+                    الأخبار
+                </button>
+                
+                <button id="ta9s" class="flex items-center p-3 text-base text-right hover:bg-zinc-700/50 text-white rounded-lg">
+                    <i class="fa-solid fa-cloud-sun text-blue-400 text-xl ml-3"></i>
+                    الطقس
+                </button>
+                
+                <button id="baht" class="flex items-center p-3 text-base text-right hover:bg-zinc-700/50 text-white rounded-lg">
+                    <i class="fa-solid fa-fire text-blue-400 text-xl ml-3"></i>
+                    الأكثر بحثاً
+                </button>
+
+                <button id="trend" class="flex items-center p-3 text-base text-right hover:bg-zinc-700/50 text-white rounded-lg">
+                    <i class="fa-solid fa-chart-line text-blue-400 text-xl ml-3"></i>
+                    الترند
+                </button>
+                
+                <hr style="border:  1px solid #313131;">
+                
+                <button id="changeBgBtn" class="flex items-center p-3 text-base text-right hover:bg-zinc-700/50 text-white rounded-lg">
+                    <i class="fa-solid fa-image text-blue-400 text-xl ml-3"></i>
+                    تغيير الخلفية
+                </button>
+
+                <!-- فاصل أنيق -->
+                <hr class="border-t border-zinc-700 my-2">
+
+                <button onclick="showSettings()" class="flex items-center p-3 text-base text-right hover:bg-zinc-700/50 text-white rounded-lg">
+                    <i class="fa-solid fa-gear text-blue-400 text-xl ml-3"></i>
+                    الإعدادات
+                </button>
+                
+                <button class="flex items-center p-3 text-base text-right hover:bg-zinc-700/50 text-white rounded-lg">
+                    <i class="fa-solid fa-user text-blue-400 text-xl ml-3"></i>
+                    حسابي
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة تغيير الخلفية (مودال) -->
+    <div id="bgModal" class="modal-overlay fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="modal-content glass-effect w-full max-w-2xl rounded-2xl shadow-2xl md:max-h-[90vh]">
+            <!-- رأس المودال -->
+            <div class="modal-header flex justify-between items-center p-6">
+                <h2 class="text-2xl font-bold text-white">تغيير خلفية الموقع</h2>
+                <button id="closeModal" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-zinc-700/50 transition">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+            </div>
+            
+            <!-- محتوى المودال -->
+            <div class="modal-body p-6 overflow-y-auto">
+                <!-- شبكة الصور -->
+                <div class="image-grid mb-6" id="bgImageGrid">
+                    <!-- سيتم ملؤها ديناميكيًا -->
+                </div>
+            </div>
+            
+            <!-- زر رفع الصورة -->
+            <div class="modal-footer flex justify-center p-6">
+                <label for="uploadImage" class="apple-btn flex items-center gap-2 px-4 py-3 rounded-xl cursor-pointer">
+                    <i class="fas fa-upload"></i>
+                    <span>رفع صورة</span>
+                    <input type="file" id="uploadImage" accept="image/*" class="hidden" />
+                </label>
+            </div>
+        </div>
+    </div>
+
+
+
+<!-- انترنت -->
+<div id="nointernet" class="banner offline">
+    لا تتوفر لديك انترنت، يرجى إعادة الاتصال
+</div>
+
+<div id="yesinternet" class="banner online">
+    تم استعادة الانترنت
+</div>
+
+
+<!-- نافذة الإعدادات -->
+<div class="seatting" id="seattng">
+    <div class="settings-box">
+
+        <!-- الهيدر -->
+        <div class="settings-header">
+            <button id="closeSettings"><i class="fa-solid fa-left-long"></i></button>
+            <span class="settings-title">الإعدادات</span>
+        </div>
+
+        <!-- مربع البحث -->
+        <div class="search-area">
+            <input type="text" id="settingsSearch" placeholder="ابحث في الإعدادات...">
+        </div>
+
+        <!-- محتوى الإعدادات -->
+        <div class="settings-content" id="settingsList">
+
+            <div class="section">
+                <h3>عام</h3>
+                <div class="item" data-name="حول">
+                    <span>حول</span>
+                </div>
+                <div class="item" data-name="اللغة والمنطقة">
+                    <span>اللغة والمنطقة</span>
+                </div>
+                <div class="item" data-name="التاريخ والوقت">
+                    <span>التاريخ والوقت</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>الشاشة والمظهر</h3>
+                <div class="item" data-name="الوضع الليلي">
+                    <span>الوضع الليلي</span>
+                    <label class="switch"><input type="checkbox"><span class="slider"></span></label>
+                </div>
+                <div class="item" data-name="سطوع الشاشة">
+                    <span>سطوع الشاشة</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>الخصوصية</h3>
+                <div class="item" data-name="الموقع الجغرافي">
+                    <span>الموقع الجغرافي</span>
+                </div>
+                <div class="item" data-name="الكاميرا">
+                    <span>الكاميرا</span>
+                </div>
+                <div class="item" data-name="المايكروفون">
+                    <span>المايكروفون</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<script src="script.js"></script>
+</body>
+</html>
